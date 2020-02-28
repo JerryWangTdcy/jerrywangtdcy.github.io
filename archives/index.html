@@ -1,46 +1,68 @@
 <!DOCTYPE html>
-<html lang="zh">
-  <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<html>
+<head>
+  <meta charset="utf-8">
   
-  <title>
-    Blog
-  </title>
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="Jerry Wang" />
-   
-  
-<link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
 
+  
+  <title>Archives | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Blog">
+<meta property="og:url" content="https://www.wangzilong.cn/archives/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:locale" content="ln">
+<meta property="article:author" content="Jerry Wang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
   
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
-  <body>
-    <header id="header">
-  <a class="header-sign" href="/">
-    <img src="/favicon.png" alt="sign" />
-    <span>YOG<br />WANG</span>
-  </a>
-  <nav class="header-navbar">
-    
-    <a class="nav-link" href="/archives">文章</a>
-    
-    <a class="nav-link" href="/about">我</a>
-    
-    <a class="nav-link" href="https://github.com/yogwang" target="_blank" rel="noopener">GitHub</a>
-    
-  </nav>
-</header>
-
+<body>
+  <div id="container">
     <div id="wrap">
-      <main id="container">
-  
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.wangzilong.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
   
   
     
@@ -48,132 +70,110 @@
       
       
       <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
         <div class="archives">
     
-    <div class="archive-article archive-type-post">
+    <article class="archive-article archive-type-post">
   <div class="archive-article-inner">
     <header class="archive-article-header">
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5/" rel="tag">H5</a></li></ul>
-
-      
-  
-    <h2 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/27/oepnApp/">h5页面打开app，安卓端和苹果端</a>
-    </h2>
-  
-
-    </header>
-     
-  <article class="article-content">
-    <p>对于App的分享页面，移动端经常会遇到需要唤起App并定位的功能。</p>
-<h3 id="跳转到App方法"><a href="#跳转到App方法" class="headerlink" title="跳转到App方法"></a>跳转到App方法</h3><p>安卓通常使用 URL Scheme 方法<br>IOS有两种方法 meta标签和Universal Links， 我们通常使用Universal Links</p>
-<h2 id="URL-Scheme"><a href="#URL-Scheme" class="headerlink" title="URL Scheme"></a>URL Scheme</h2><p>URL Scheme就是一个可以让app相互之间可以跳转的对外接口。每个app都不同，如果有重复的会响应先安装的app。URL Scheme的格式为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[scheme]://[host]/[path]?[query]</span><br></pre></td></tr></table></figure>
-<p>比如：</p>
-<ul>
-<li>淘宝： taobao://</li>
-<li>QQ： mqq://</li>
-<li>微信： weixin://</li>
-</ul>
-<h2 id="meta标签"><a href="#meta标签" class="headerlink" title="meta标签"></a>meta标签</h2><p>在网页上设置meta标签，使用safari打开的时候，就会在顶部显示自己app的导航条。如果没有安装app点击能够跳转到appstore去下载，如果安装了app就能直接通过顶部的meta标签唤醒app了。（此为IOS特有）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta charset=<span class="string">"UTF-8"</span> name=<span class="string">"apple-itunes-app"</span> content=<span class="string">"app-id=yourId, affiliate-data=myAffiliateData, app-argument=yourScheme://"</span>&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Universal-Links"><a href="#Universal-Links" class="headerlink" title="Universal Links"></a>Universal Links</h2><p>iOS 9之前，一直使用的是URL Schemes技术来从外部对App进行跳转，但是iOS系统中进行URL Schemes跳转的时候如果没有安装App，会提示Cannot open Page的提示，而且当注册有多个scheme相同的时候，目前没有办法区分，但是从iOS 9起可以使用Universal Links技术进行跳转页面，这是一种体验更加完美的解决方案</p>
-<h2 id="实现唤醒APP功能"><a href="#实现唤醒APP功能" class="headerlink" title="实现唤醒APP功能"></a>实现唤醒APP功能</h2><p>大多数需要唤醒app时都是在微信内，但由于微信内部禁用了唤醒功能，所以做了一个引导页，引导用户通过浏览器打开。（一些知名app可以唤起）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"main"</span>&gt;</span><br><span class="line">  &lt;div class=<span class="string">"tips"</span> id=<span class="string">"ios"</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">"tips"</span> id=<span class="string">"android"</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">"logo"</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">"info"</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div id=<span class="string">"a-btn"</span> class=<span class="string">"downloadBtna"</span>&gt;&lt;a href=<span class="string">"https://wwww.******.com.cn/api/app/download"</span>&gt;&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div id=<span class="string">"i-btn"</span> class=<span class="string">"downloadBtni"</span>&gt;&lt;a href=<span class="string">"https://itunes.apple.com/cn/app/yourId"</span>&gt;&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 获取浏览器用于 HTTP 请求的用户代理头的值</span><br><span class="line">var u = navigator.userAgent, ua = u.toLowerCase()</span><br><span class="line">var isWeiXin = ua.indexOf(<span class="string">'micromessenger'</span>) != -1;</span><br><span class="line">var &#123;isAndroid, isIOS&#125; = detectVersion()</span><br><span class="line">// 获取参数id值、来源值，以便用于scheme跳转</span><br><span class="line">var id = getQueryString(<span class="string">'id'</span>)</span><br><span class="line">var <span class="built_in">source</span> = getQueryString(<span class="string">'source'</span>)</span><br><span class="line">// 判断当前浏览器</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">detectVersion</span></span>() &#123;</span><br><span class="line">  var isAndroid, isIOS;</span><br><span class="line">  <span class="keyword">if</span>(u.indexOf(<span class="string">'Android'</span>) &gt; -1 || u.indexOf(<span class="string">'Linux'</span>) &gt; -1) &#123;      // android or uc browser</span><br><span class="line">      // android</span><br><span class="line">      isAndroid = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(ua.indexOf(<span class="string">"like mac os x"</span>) &gt; 0) &#123;</span><br><span class="line">      isIOS = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> &#123;isAndroid, isIOS&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 唤起app方法</span><br><span class="line"><span class="keyword">function</span> openApp(callback) &#123;</span><br><span class="line">  var url = <span class="string">""</span></span><br><span class="line">  <span class="keyword">if</span> (isAndroid ) &#123;</span><br><span class="line">    url = <span class="string">'[scheme]://'</span>+ <span class="built_in">source</span> +<span class="string">'?id='</span> + id</span><br><span class="line">    var timeout, t = 3000, hasApp = <span class="literal">true</span></span><br><span class="line">    var openScript = setTimeout( <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="keyword">if</span> (!hasApp) &#123;</span><br><span class="line">        callback &amp;&amp; callback()</span><br><span class="line">      &#125;</span><br><span class="line">      document.body.removeChild(ifr)</span><br><span class="line">    &#125;,5000)</span><br><span class="line"></span><br><span class="line">    var t1 = Date.now()</span><br><span class="line">    var ifr = document.createElement(<span class="string">"iframe"</span>)</span><br><span class="line">    ifr.setAttribute(<span class="string">"src"</span>, url)</span><br><span class="line">    ifr.setAttribute(<span class="string">"style"</span>, <span class="string">"display:none"</span>)</span><br><span class="line">    document.body.appendChild(ifr)</span><br><span class="line">    timeout = setTimeout( <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      var t2 = Date.now()</span><br><span class="line">      <span class="keyword">if</span> (t2 - t1 &lt; t + 100) &#123;</span><br><span class="line">        hasApp = <span class="literal">false</span></span><br><span class="line">        // 此处创建一个定时器，以便用于判断页面是否跳转，如果未成功跳转，那么判断未安装app，此时跳转到app下载</span><br><span class="line">        window.location.href=<span class="string">"https://www.******.com.cn/api/app/download"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,t)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (isIOS) &#123;</span><br><span class="line">    // Universal Links 需要IOS工程师进行配置</span><br><span class="line">    window.location.href= <span class="string">"https://www.******.com.cn/"</span> + <span class="built_in">source</span> + <span class="string">"?id="</span> + id</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">  <span class="keyword">if</span>(isWeiXin) &#123;</span><br><span class="line">    <span class="keyword">if</span>(isAndroid) &#123;</span><br><span class="line">      $(<span class="string">"#a-btn"</span>).show()</span><br><span class="line">      $(<span class="string">"#android"</span>).show()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      $(<span class="string">"#i-btn"</span>).show()</span><br><span class="line">      $(<span class="string">"#ios"</span>).show()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(isAndroid) &#123;</span><br><span class="line">      $(<span class="string">"#android"</span>).show()</span><br><span class="line">      $(<span class="string">"#a-btn"</span>).show()</span><br><span class="line">      openApp()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      $(<span class="string">"#ios"</span>).show()</span><br><span class="line">      $(<span class="string">"#i-btn"</span>).show()</span><br><span class="line">      openApp()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;   </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="以上并为考虑ios9以下版本"><a href="#以上并为考虑ios9以下版本" class="headerlink" title="以上并为考虑ios9以下版本"></a>以上并为考虑ios9以下版本</h3> 
-  </article>
-
-
-    <p class="archive-article-date">
+      <a href="/2020/02/27/oepnApp/" class="archive-article-date">
   <time datetime="2020-02-27T13:26:20.000Z" itemprop="datePublished">Feb 27</time>
-</p>
-  </div>
-</div>
-  
-    
-    
-    <div class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
+</a>
       
   
-    <h2 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/27/tinymce/">tinymce</a>
-    </h2>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/02/27/oepnApp/">h5页面打开app，安卓端和苹果端</a>
+    </h1>
   
 
     </header>
-     
-  <article class="article-content">
-    <p>elcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
- 
-  </article>
-
-
-    <p class="archive-article-date">
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/02/27/tinymce/" class="archive-article-date">
   <time datetime="2020-02-27T11:51:24.000Z" itemprop="datePublished">Feb 27</time>
-</p>
-  </div>
-</div>
-  
-    
-    
-    <div class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
+</a>
       
   
-    <h2 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/27/hello-world/">Hello World</a>
-    </h2>
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/02/27/tinymce/">tinymce</a>
+    </h1>
   
 
     </header>
-     
-  <article class="article-content">
-     
-  </article>
-
-
-    <p class="archive-article-date">
-  <time datetime="2020-02-27T11:31:19.261Z" itemprop="datePublished">Feb 27</time>
-</p>
   </div>
-</div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/02/27/hello-world/" class="archive-article-date">
+  <time datetime="2020-02-27T11:31:19.261Z" itemprop="datePublished">Feb 27</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/02/27/hello-world/">Hello World</a>
+    </h1>
+  
+
+    </header>
+  </div>
+</article>
   
   
     </div></section>
   
 
 
-
-</main>
-<aside id="sidebar">
-  
-    
-<section class="userinfo">
-    <img src="/img/userimg.jpg" alt="王阳阳">
-    <h2>王阳阳</h2>
-    <span>久之须自见得</span>
-    <p>ODIN.INC</p>
-    <p>Jiaxing,China</p>
-    <div>
-      
-      <a class='fa fa-github' href="https://github.com/yogwang" target="_blank"></a>
-      
-      <a class='fa fa-weibo' href="http://weibo.com/yooooooge" target="_blank"></a>
-      
-    </div>
 </section>
+        
+          <aside id="sidebar">
+  
+    
 
   
     
-  <section class="widget-wrap">
-    <h3 class="widget-title">recent_posts</h3>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -191,52 +191,48 @@
         
       </ul>
     </div>
-  </section>
-
-  
-    
-  <section class="widget-wrap">
-    <h3 class="widget-title">archive</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
-    </div>
-  </section>
-
-
-  
-    
-  <section class="widget-wrap">
-    <h3 class="widget-title">tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a></li></ul>
-    </div>
-  </section>
-
+  </div>
 
   
 </aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jerry Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
-    <footer id="footer">
-  <span>
-    &copy;2019-2020 Jerry Wang powered_by
-    <a href="http://hexo.io/" target="_blank">Hexo</a>
-  </span>
-  <br />
-  <span
-    >licensed
-    <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank"
-      >CC BY-NC 4.0</a
-    ></span
-  >
+  </div>
 </footer>
-<div>
-  <a id="gotop" class="fa fa-level-up"></a>
-</div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
- 
-<script src="/js/common.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  </body>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
 </html>
