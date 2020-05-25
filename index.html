@@ -64,6 +64,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-eventBus" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/25/eventBus/" class="article-date">
+  <time datetime="2020-05-25T14:19:30.000Z" itemprop="datePublished">2020-05-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/25/eventBus/">eventBus</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>哇，一转眼好几个月过去了，我的blog至今没有更新…</p>
+<p>由于我实在太懒了，拖延症晚期，今天立了flag，一定要写两篇，刚好今天又接触到一个新的知识点。</p>
+<h2 id="eventBus，一个vue-2-0时代前被我忽略的神奇操作"><a href="#eventBus，一个vue-2-0时代前被我忽略的神奇操作" class="headerlink" title="eventBus，一个vue 2.0时代前被我忽略的神奇操作"></a>eventBus，一个vue 2.0时代前被我忽略的神奇操作</h2><p>对于现在流行的前端开发模式（MVVM），经常涉及到多个组件间的通信，vue有vuex的支持，兄弟间组件传值很是方便，<br>自己写小程序的时候，苦于没有vuex类库，又觉得自己封装vuex有一点麻烦，兄弟间通信基本靠本地存储这种又笨又蠢的方法…<br>直到今天无意间发现了这个很好用的设计模式 — eventBus， 之前面试的时候面试官也有问我了解么，我当时并没有听过，<br>和小伙伴 <code>@yogwang</code>聊天，他说这是vue1.0时代的产物，我也就没有特别关注过。<br>今天熟悉公司代码，无意间发现，诶，怎么这么多的bus.on方法的绑定呢，和小伙伴聊了聊发现，这是我错过的神奇方法。</p>
+<h3 id="eventBus-举🌰说明"><a href="#eventBus-举🌰说明" class="headerlink" title="eventBus 举🌰说明"></a>eventBus 举🌰说明</h3><p>比如我们现在有三个组件，分别是父组件 - father, 哥哥组件 - brother, 妹妹组件 - sister，现在，哥哥想发微信给妹妹，要怎么样操作呢？<br>首先，我们给哥哥的手机下载一个微信，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;view bindtap&#x3D;&quot;click&quot;&gt;点击发送&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+<p>现在，想要把信息发送出去，我们需要建立一个基站，也就是bus.js。<br>然后，我们可以在基站内建立功能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">my.BUS &#x3D; (function()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    &#x2F;&#x2F; 通过on来注册事件</span><br><span class="line">    on: (name, callback) &#x3D;&gt; &#123;</span><br><span class="line">        if (isString(name) &amp;&amp; isFunction(callback)) &#123;</span><br><span class="line">            &#x2F;&#x2F;防止多次注册触发</span><br><span class="line">            my.BUS.off(name, callback);</span><br><span class="line">            if (!events[name]) &#123;</span><br><span class="line">                events[name] &#x3D; [];</span><br><span class="line">            &#125;</span><br><span class="line">            events[name].push(callback);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 通过emit来触发事件</span><br><span class="line">    emit: () &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 通过off来卸载事件</span><br><span class="line">    off:() &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;) ()</span><br></pre></td></tr></table></figure>
+<p>接下来，我们在哥哥的手机中编辑好要发送的消息<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">click() &#123;</span><br><span class="line">  my.BUS.emit(&#39;msg&#39;, &#39;hello world&#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这样，妹妹就收到了哥哥发来的短信</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my.BUS.on(&#39;msg&#39;, res &#x3D;&gt; &#123;</span><br><span class="line">  console.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这个对于没有vuex类库的小程序来讲，作为兄弟组件间传值还是比较方便的。</p>
+
+      
+    </div>
+    <!-- <footer class="article-footer">
+      <a data-url="https://www.wangzilong.cn/2020/05/25/eventBus/" data-id="ckaml7ac10000ynwk6tm7312g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+    </footer> -->
+  </div>
+  
+</article>
+
+<!--  -->
+  
     <article id="post-oepnApp" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/27/oepnApp/" class="article-date">
@@ -271,7 +319,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a></li></ul>
     </div>
   </div>
 
@@ -281,7 +329,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 10px;">环境</a>
+      <a href="/tags/H5/" style="font-size: 10px;">H5</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 10px;">环境</a>
     </div>
   </div>
 
@@ -290,7 +338,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li></ul>
     </div>
   </div>
 
@@ -301,6 +349,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/05/25/eventBus/">eventBus</a>
+          </li>
         
           <li>
             <a href="/2020/02/27/oepnApp/">h5页面打开app，安卓端和苹果端</a>
