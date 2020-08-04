@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.wangzilong.cn/"/>
-  <updated>2020-05-25T15:38:57.810Z</updated>
+  <updated>2020-08-04T03:20:43.536Z</updated>
   <id>https://www.wangzilong.cn/</id>
   
   <author>
@@ -17,20 +17,132 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>类写法</title>
-    <link href="https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95/"/>
-    <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95/</id>
-    <published>2020-05-25T15:10:46.000Z</published>
-    <updated>2020-05-25T15:38:57.810Z</updated>
+    <title>JS 基础版 - 循环&amp;遍历</title>
+    <link href="https://www.wangzilong.cn/2020/08/04/%E5%BE%AA%E7%8E%AF/"/>
+    <id>https://www.wangzilong.cn/2020/08/04/%E5%BE%AA%E7%8E%AF/</id>
+    <published>2020-08-04T03:06:02.000Z</published>
+    <updated>2020-08-04T03:20:43.536Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h3 id="懒王来更新了"><a href="#懒王来更新了" class="headerlink" title="懒王来更新了"></a>懒王来更新了</h3><p>最近写了很多关于数据处理的代码，突然发现最基础的循环里隐藏着很多不为人知的坑，现在准备记录一下。</p><h2 id="万物皆可-for-循环"><a href="#万物皆可-for-循环" class="headerlink" title="万物皆可 for 循环"></a>万物皆可 for 循环</h2><p>for 语句用于创建一个循环，它包含了三个可选的表达式，这三个表达式被包围在圆括号之中，使用分号分隔，后跟一个用于在循环中执行的语句（通常是一个块语句）。<br>示例1</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (var i &#x3D; 0; i &lt; 9; i++) &#123;</span><br><span class="line">  console.log(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>如果使用块语句，可以这样写<br>示例2</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var i &#x3D; 3</span><br><span class="line">for(; i &lt; 9; i++) &#123;</span><br><span class="line">  &#x2F;&#x2F; code</span><br><span class="line">&#125;</span><br><span class="line">for(;;i++) &#123;</span><br><span class="line">  if(i &gt; 3) break</span><br><span class="line">  &#x2F;&#x2F; 一定要确保循环跳出，否则会进入死循环</span><br><span class="line">&#125;</span><br><span class="line">for(;;;) &#123;</span><br><span class="line">  if(i &gt; 3) break</span><br><span class="line">  console.log(i)</span><br><span class="line">  i++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;想学class类写法好久了&quot;&gt;&lt;a href=&quot;#想学class类写法好久了&quot; class=&quot;headerlink&quot; title=&quot;想学class类写法好久了&quot;&gt;&lt;/a&gt;想学class类写法好久了&lt;/h3&gt;&lt;p&gt;一直觉得class类写法比较优秀，可是自己总是对其一
+        &lt;h3 id=&quot;懒王来更新了&quot;&gt;&lt;a href=&quot;#懒王来更新了&quot; class=&quot;headerlink&quot; title=&quot;懒王来更新了&quot;&gt;&lt;/a&gt;懒王来更新了&lt;/h3&gt;&lt;p&gt;最近写了很多关于数据处理的代码，突然发现最基础的循环里隐藏着很多不为人知的坑，现在准备记录一下。&lt;/p&gt;
+&lt;
       
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>js骚操作</title>
+    <link href="https://www.wangzilong.cn/2020/05/26/js%E9%AA%9A%E6%93%8D%E4%BD%9C/"/>
+    <id>https://www.wangzilong.cn/2020/05/26/js%E9%AA%9A%E6%93%8D%E4%BD%9C/</id>
+    <published>2020-05-26T03:36:50.000Z</published>
+    <updated>2020-05-26T03:40:38.784Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="动态变量名"><a href="#动态变量名" class="headerlink" title="动态变量名"></a>动态变量名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let aaa &#x3D; &#39;bbb&#39;</span><br><span class="line">const obj &#x3D; &#123;</span><br><span class="line">  [&#96;a&#96;]: 123</span><br><span class="line">&#125;</span><br><span class="line">console.log(obj)</span><br><span class="line">&#x2F;&#x2F; &#123; bbb: 123 &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;动态变量名&quot;&gt;&lt;a href=&quot;#动态变量名&quot; class=&quot;headerlink&quot; title=&quot;动态变量名&quot;&gt;&lt;/a&gt;动态变量名&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="JavaScript" scheme="https://www.wangzilong.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Object.keys</title>
+    <link href="https://www.wangzilong.cn/2020/05/26/Objectkeys/"/>
+    <id>https://www.wangzilong.cn/2020/05/26/Objectkeys/</id>
+    <published>2020-05-26T03:23:36.000Z</published>
+    <updated>2020-05-26T03:27:32.193Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p><code>obj</code><br>要返回其枚举自身属性的对象。</p><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p><code>一个表示给定对象的所有可枚举属性的字符串数组。</code></p><p>Object.keys 返回一个所有元素为字符串的数组，其元素来自于从给定的object上面可直接枚举的属性。这些属性的顺序与手动遍历该对象属性时的一致。</p><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; simple array</span><br><span class="line">var arr &#x3D; [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];</span><br><span class="line">console.log(Object.keys(arr)); &#x2F;&#x2F; console: [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; array like object</span><br><span class="line">var obj &#x3D; &#123; 0: &#39;a&#39;, 1: &#39;b&#39;, 2: &#39;c&#39; &#125;;</span><br><span class="line">console.log(Object.keys(obj)); &#x2F;&#x2F; console: [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; array like object with random key ordering</span><br><span class="line">var anObj &#x3D; &#123; 100: &#39;a&#39;, 2: &#39;b&#39;, 7: &#39;c&#39; &#125;;</span><br><span class="line">console.log(Object.keys(anObj)); &#x2F;&#x2F; console: [&#39;2&#39;, &#39;7&#39;, &#39;100&#39;]</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; getFoo is a property which isn&#39;t enumerable</span><br><span class="line">var myObj &#x3D; Object.create(&#123;&#125;, &#123;</span><br><span class="line">  getFoo: &#123;</span><br><span class="line">    value: function () &#123; return this.foo; &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;);</span><br><span class="line">myObj.foo &#x3D; 1;</span><br><span class="line">console.log(Object.keys(myObj)); &#x2F;&#x2F; console: [&#39;foo&#39;]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;参数&quot;&gt;&lt;a href=&quot;#参数&quot; class=&quot;headerlink&quot; title=&quot;参数&quot;&gt;&lt;/a&gt;参数&lt;/h3&gt;&lt;p&gt;&lt;code&gt;obj&lt;/code&gt;&lt;br&gt;要返回其枚举自身属性的对象。&lt;/p&gt;
+&lt;h3 id=&quot;返回值&quot;&gt;&lt;a href=&quot;#返回值&quot; cla
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>类写法</title>
+    <link href="https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95/"/>
+    <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95/</id>
+    <published>2020-05-25T15:10:46.000Z</published>
+    <updated>2020-05-27T05:31:03.542Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;想学class类写法好久了&quot;&gt;&lt;a href=&quot;#想学class类写法好久了&quot; class=&quot;headerlink&quot; title=&quot;想学class类写法好久了&quot;&gt;&lt;/a&gt;想学class类写法好久了&lt;/h3&gt;&lt;p&gt;一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。&lt;/p&gt;
+&lt;p&gt;下面记录一些简单的类书写方式，巩固一下记忆。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="JavaScript" scheme="https://www.wangzilong.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>类写法</title>
+    <link href="https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy/"/>
+    <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy/</id>
+    <published>2020-05-25T15:10:46.000Z</published>
+    <updated>2020-05-27T05:41:20.521Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;想学class类写法好久了&quot;&gt;&lt;a href=&quot;#想学class类写法好久了&quot; class=&quot;headerlink&quot; title=&quot;想学class类写法好久了&quot;&gt;&lt;/a&gt;想学class类写法好久了&lt;/h3&gt;&lt;p&gt;一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。&lt;/p&gt;
+&lt;p&gt;下面记录一些简单的类书写方式，巩固一下记忆。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="JavaScript" scheme="https://www.wangzilong.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>类写法</title>
+    <link href="https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy%202/"/>
+    <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy%202/</id>
+    <published>2020-05-25T15:10:46.000Z</published>
+    <updated>2020-05-27T05:41:22.412Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;想学class类写法好久了&quot;&gt;&lt;a href=&quot;#想学class类写法好久了&quot; class=&quot;headerlink&quot; title=&quot;想学class类写法好久了&quot;&gt;&lt;/a&gt;想学class类写法好久了&lt;/h3&gt;&lt;p&gt;一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。&lt;/p&gt;
+&lt;p&gt;下面记录一些简单的类书写方式，巩固一下记忆。&lt;/p&gt;
     
     </summary>
     
