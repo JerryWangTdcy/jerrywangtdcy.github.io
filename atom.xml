@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.wangzilong.cn/"/>
-  <updated>2020-11-24T02:24:27.493Z</updated>
+  <updated>2020-11-24T02:36:47.023Z</updated>
   <id>https://www.wangzilong.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>js常用方法集合</title>
+    <link href="https://www.wangzilong.cn/2020/11/24/js%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/"/>
+    <id>https://www.wangzilong.cn/2020/11/24/js%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/</id>
+    <published>2020-11-24T02:34:30.000Z</published>
+    <updated>2020-11-24T02:36:47.023Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数组交换位置"><a href="#数组交换位置" class="headerlink" title="数组交换位置"></a>数组交换位置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">* 数组元素交换位置</span><br><span class="line">* @param &#123;array&#125; arr 数组</span><br><span class="line">* @param &#123;number&#125; index1 添加项目的位置</span><br><span class="line">* @param &#123;number&#125; index2 删除项目的位置</span><br><span class="line">* index1和index2分别是两个数组的索引值，即是两个要交换元素位置的索引值，如1，5就是数组中下标为1和5的两个元素交换位置</span><br><span class="line">*&#x2F;</span><br><span class="line">function swapArray(arr, index1, index2) &#123;</span><br><span class="line">  arr[index1] &#x3D; arr.splice(index2, 1, arr[index1])[0];</span><br><span class="line">  return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;数组交换位置&quot;&gt;&lt;a href=&quot;#数组交换位置&quot; class=&quot;headerlink&quot; title=&quot;数组交换位置&quot;&gt;&lt;/a&gt;数组交换位置&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
+      
+    
+    </summary>
+    
+    
+    
+      <category term="方法集合" scheme="https://www.wangzilong.cn/tags/%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/"/>
+    
+  </entry>
   
   <entry>
     <title>拖拽表格</title>
@@ -115,50 +139,6 @@
     <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95/</id>
     <published>2020-05-25T15:10:46.000Z</published>
     <updated>2020-05-27T05:31:03.542Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;想学class类写法好久了&quot;&gt;&lt;a href=&quot;#想学class类写法好久了&quot; class=&quot;headerlink&quot; title=&quot;想学class类写法好久了&quot;&gt;&lt;/a&gt;想学class类写法好久了&lt;/h3&gt;&lt;p&gt;一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。&lt;/p&gt;
-&lt;p&gt;下面记录一些简单的类书写方式，巩固一下记忆。&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="JavaScript" scheme="https://www.wangzilong.cn/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>类写法</title>
-    <link href="https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy/"/>
-    <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy/</id>
-    <published>2020-05-25T15:10:46.000Z</published>
-    <updated>2020-05-27T05:41:20.521Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;想学class类写法好久了&quot;&gt;&lt;a href=&quot;#想学class类写法好久了&quot; class=&quot;headerlink&quot; title=&quot;想学class类写法好久了&quot;&gt;&lt;/a&gt;想学class类写法好久了&lt;/h3&gt;&lt;p&gt;一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。&lt;/p&gt;
-&lt;p&gt;下面记录一些简单的类书写方式，巩固一下记忆。&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="JavaScript" scheme="https://www.wangzilong.cn/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>类写法</title>
-    <link href="https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy%202/"/>
-    <id>https://www.wangzilong.cn/2020/05/25/%E7%B1%BB%E5%86%99%E6%B3%95%20copy%202/</id>
-    <published>2020-05-25T15:10:46.000Z</published>
-    <updated>2020-05-27T05:41:22.412Z</updated>
     
     <content type="html"><![CDATA[<h3 id="想学class类写法好久了"><a href="#想学class类写法好久了" class="headerlink" title="想学class类写法好久了"></a>想学class类写法好久了</h3><p>一直觉得class类写法比较优秀，可是自己总是对其一知半解，现在刚刚弄清怎么写了，所以先留个坑，等以后熟练了，再来补充。</p><p>下面记录一些简单的类书写方式，巩固一下记忆。</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class myFirstClass &#123;</span><br><span class="line">  constructor (a, b)&#123;</span><br><span class="line">    this.c &#x3D; a + b</span><br><span class="line">    console.log(this.c)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(new myFirstClass(1,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 3，3</span><br><span class="line">console.log(new myFirstClass(3,2).c)</span><br><span class="line">&#x2F;&#x2F; expected output: 5，5</span><br></pre></td></tr></table></figure><p>通过构造一个新的类会生成一个处理后变量c的值, 而且每次生成新的类也不会影响到其他的构造</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Square extends Polygon &#123;</span><br><span class="line">  constructor(length) &#123;</span><br><span class="line">    super();</span><br><span class="line">    &#x2F;&#x2F; 这里必须用super来调用父类的构造函数</span><br><span class="line">    this.name &#x3D; &#39;Square&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  get area() &#123;</span><br><span class="line">      return this.height * this.width;</span><br><span class="line">  &#125;</span><br><span class="line">  set area(value) &#123;</span><br><span class="line">      &#x2F;&#x2F; 注意：不可使用 this.area &#x3D; value</span><br><span class="line">      &#x2F;&#x2F; 否则会导致循环call setter方法导致爆栈</span><br><span class="line">      this._area &#x3D; value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
