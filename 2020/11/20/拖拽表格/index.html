@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang=ln>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>拖拽表格 | JerryWang</title>
+  <meta name="description" content="哎，最近公司PM又搞事了，非要做什么拖拽表格，拖拽表头调整位置不行，还要能调整宽度…市面上现成的轮子，要么是拖拽位置，要么是拖拽宽度，简单找了找，还是自己造轮子吧，自己造的想怎么捏怎么捏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拖拽表格">
+<meta property="og:url" content="https://www.wangzilong.cn/2020/11/20/%E6%8B%96%E6%8B%BD%E8%A1%A8%E6%A0%BC/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="哎，最近公司PM又搞事了，非要做什么拖拽表格，拖拽表头调整位置不行，还要能调整宽度…市面上现成的轮子，要么是拖拽位置，要么是拖拽宽度，简单找了找，还是自己造轮子吧，自己造的想怎么捏怎么捏。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-20T03:06:02.000Z">
+<meta property="article:modified_time" content="2020-11-24T06:54:02.451Z">
+<meta property="article:author" content="Jerry Wang">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.wangzilong.cn/2020/11/20/%E6%8B%96%E6%8B%BD%E8%A1%A8%E6%A0%BC/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/JerryWangTdcy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">JerryWang</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing,China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/JerryWangTdcy" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/" rel="tag">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seo-nuxt/" rel="tag">seo nuxt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/" rel="tag">方法集合</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" rel="tag">组件库</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/H5/" style="font-size: 13px;">H5</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/css3/" style="font-size: 13px;">css3</a> <a href="/tags/seo-nuxt/" style="font-size: 13px;">seo nuxt</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 13px;">布局</a> <a href="/tags/%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/" style="font-size: 13.5px;">方法集合</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 13px;">环境</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 13px;">移动端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 13px;">组件库</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/26/vue3%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83L01/" class="title">vue3从入门到放弃L01</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-26T14:44:30.000Z" itemprop="datePublished">2022-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/26/%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/" class="title">Hexo常用命令</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-26T14:17:26.000Z" itemprop="datePublished">2022-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/03/%E8%AE%B0%E5%AE%98%E7%BD%91seo%E5%BC%80%E5%8F%91/" class="title">记官网seo开发【nuxtJS】</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-03T05:00:35.000Z" itemprop="datePublished">2022-05-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/14/%E4%BA%92%E5%8A%A8%E8%90%A5%E9%94%80%E4%B9%8B%E5%A4%A7%E8%BD%AC%E7%9B%98/" class="title">互动营销之大转盘</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-14T08:35:04.000Z" itemprop="datePublished">2021-09-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/08/%E5%BD%93%E5%BC%B9%E7%AA%97%E5%AD%98%E5%9C%A8%E6%97%B6%E7%A6%81%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/" class="title">当弹窗存在时禁止页面滚动</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-08T06:46:38.000Z" itemprop="datePublished">2021-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-拖拽表格" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      拖拽表格
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/11/20/%E6%8B%96%E6%8B%BD%E8%A1%A8%E6%A0%BC/" class="article-date">
+	  <time datetime="2020-11-20T03:06:02.000Z" itemprop="datePublished">2020-11-20</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/20/%E6%8B%96%E6%8B%BD%E8%A1%A8%E6%A0%BC/#comments" class="article-comment-link">評論</a></span> -->
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>哎，最近公司PM又搞事了，非要做什么拖拽表格，拖拽表头调整位置不行，还要能调整宽度…<br>市面上现成的轮子，要么是拖拽位置，要么是拖拽宽度，简单找了找，还是自己造轮子吧，自己造的想怎么捏怎么捏。</p>
+<span id="more"></span>
+
+<p>需求刚刚开始的时候，根据开源大佬提示，写了这样的<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wisewrong/p/8820508.html">拖拽样式</a>，开开心心的交给pm看，结果被残忍的驳回，“我要拿得起放得下的表头”：Pm如是说。<br>好吧，好吧，我写，我写。</p>
+<p>现在需求写好了，我来整理一下思路吧，看着很难，写起来很难真正做完又不觉得难的一个需求，还是被坑了好些下的。<br>首先要明确需求，表格形式，要能拿起当前点击的表头，然后拖动，当他经过左右两侧任意一个表头一半宽度的时候，在该表头，左&amp;右增加一个2像素的边，松开鼠标，将拿起的表头放到竖线处，这是表头的拖动。<br>其次，表头的宽度可以任意拖动</p>
+<p>重点来了，两端需要有固定的列</p>
+<p>好了，需求明确了，那么我们现在开始整理思路造作吧，<br>饿了么的表格有现成的拖动宽，固定列，那么就用饿了么的表格组件吧，<br>emmm，组长说，用div自己布局吧，展开元素内容过多，用饿了么的组件会有限制。<br>行行行，我都自己写！</p>
+<p>先确定表头的数据格式，此处还是要借鉴饿了么，白嫖一时爽，一直白嫖一直爽～</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tableHeader [</span><br><span class="line">  &#123;</span><br><span class="line">    label: &#x27;表头名称&#x27;,</span><br><span class="line">    prop: &#x27;name&#x27;, // 当前列数据对应字段，很重要</span><br><span class="line">    width: &#x27;&#x27;     // 当前宽度</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>通过创建一个数组来存储表头（行），通过调整数组顺序来调整列表排序，通过数组内对象属性width来存储当前列宽</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;d-table&quot; ref=&quot;dTable&quot;&gt;</span><br><span class="line">    &lt;el-scrollbar ref=&quot;el_scroll_dom&quot; class=&quot;default-scrollbar&quot; wrap-class=&quot;default-scrollbar__wrap&quot; view-class=&quot;default-scrollbar__view&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;d-table_header thead flex&quot; :style=&quot;[&#123;width:allwidth&#125;]&quot;&gt;</span><br><span class="line">        &lt;div</span><br><span class="line">          v-for=&quot;(col,index) in tableHeader&quot; </span><br><span class="line">          :key=&quot;col.label&quot; </span><br><span class="line">          :class=&quot;[&#x27;d-table_th&#x27;, &#x27;column_&#x27; + index]&quot; </span><br><span class="line">          :style=&quot;&#123; width: parseInt(col.width)+&#x27;px&#x27;&#125;&quot;</span><br><span class="line">          @mousedown=&quot;handleMouseDown($event, index)&quot;</span><br><span class="line">          @mousemove=&quot;handleMouseMove($event, index)&quot;</span><br><span class="line">        &gt;</span><br><span class="line">        &#123;&#123;col.label&#125;&#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;draggingDom&quot; ref=&quot;draggingDom&quot; v-show=&quot;draggingDomVisible&quot;&gt;&#123;&#123;draggingText&#125;&#125;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;resize-proxy&quot; ref=&quot;resizeProxy&quot; v-show=&quot;resizeProxyVisible&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/el-scrollbar&gt;</span><br><span class="line">&lt;/div&gt;      </span><br></pre></td></tr></table></figure>
+<p>这样，一个表头我们就渲染出来了，至于方法我们下面说。</p>
+<p>className <code>column_</code> 用来区分每一个表头，毕竟操作表头的宽度一定会操作dom，<code>mousedown</code> 方法为当前鼠标点下事件，即用户操作宽度或调整位置的触发点，<code>mousemove</code> 用来记录鼠标移动，这里的<code>mousemove</code>主要用来拖动表头宽度时，鼠标样式的效果。</p>
+<h2 id="接下来是拖动表头宽度"><a href="#接下来是拖动表头宽度" class="headerlink" title="接下来是拖动表头宽度"></a>接下来是拖动表头宽度</h2><p>之所以先写这个，原因是整个拖拽的思路都是白嫖了饿了么表格宽度调整<br>首先我们需要整理一下，关于拖动都需要哪些元素，这里应用了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect">getBoundingClientRect</a>函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const tableEl = this.$refs.dTable  // 获取外层父级实例</span><br><span class="line">const tableLeft = tableEl.getBoundingClientRect().left // 父级距离屏幕左边距离</span><br><span class="line">const columnEl = this.$el.querySelector(&#x27;.column_&#x27;+i) // 获取当前点击元素dom</span><br><span class="line">const columnRect = columnEl.getBoundingClientRect() </span><br><span class="line">const minLeft = columnRect.left - tableLeft + 30  // 为什么加30？</span><br><span class="line"></span><br><span class="line">this.dragState = &#123;</span><br><span class="line">  startMouseLeft: event.clientX, // 鼠标当前x坐标，设置为起始</span><br><span class="line">  startLeft: columnRect.right - tableLeft, // 距离左边初始值</span><br><span class="line">  startColumnLeft: columnRect.left - tableLeft, // 表头左边距离</span><br><span class="line">  tableLeft</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们设置鼠标经过时样式变化，在鼠标经过的元素右边距离8像素的位置，将鼠标指针更改为col-resize，并且将当前点拖拽锁设定为拖拽宽度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 鼠标移动事件，增加鼠标样式</span><br><span class="line">handleMouseMove(event, i) &#123;</span><br><span class="line">  let target = event.target;</span><br><span class="line">  if (!this.dragging) &#123;</span><br><span class="line">    let rect = target.getBoundingClientRect();</span><br><span class="line">    const bodyStyle = document.body.style;</span><br><span class="line">    if (rect.width &gt; 12 &amp;&amp; rect.right - event.pageX &lt; 8) &#123;  </span><br><span class="line">      bodyStyle.cursor = &#x27;col-resize&#x27;;</span><br><span class="line">      target.style.cursor = &#x27;col-resize&#x27;;</span><br><span class="line">      this.draggingColumn = true</span><br><span class="line">    &#125; else if (!this.dragging) &#123;</span><br><span class="line">      bodyStyle.cursor = &#x27;&#x27;;</span><br><span class="line">      target.style.cursor = &#x27;move&#x27;;</span><br><span class="line">      this.draggingColumn = null;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>接下来开始写鼠标拖拽表头宽度，我们先将必要元素准备好</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">this.dragging = true; // 开启拖动</span><br><span class="line">this.resizeProxyVisible = true;  // 显示拖拽线实例</span><br><span class="line">const resizeProxy = this.$refs.resizeProxy; // 获取实例</span><br><span class="line">resizeProxy.style.left = this.dragState.startLeft + &#x27;px&#x27;; 修改左边距</span><br><span class="line">document.onselectstart = function() &#123; return false; &#125;; // 禁止选中文字</span><br><span class="line">document.ondragstart = function() &#123; return false; &#125;; // 禁止拖拽</span><br><span class="line">// 添加监听事件，以监听鼠标移动，抬起事件</span><br><span class="line">document.addEventListener(&#x27;mousemove&#x27;, handleMouseMove);</span><br><span class="line">document.addEventListener(&#x27;mouseup&#x27;, handleMouseUp);</span><br></pre></td></tr></table></figure>
+<p>然后我们设置鼠标移动效果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const handleMouseMove = (event) =&gt; &#123;</span><br><span class="line">  const deltaLeft = event.clientX - this.dragState.startMouseLeft; // 获取鼠标实际滚动距离</span><br><span class="line">  const proxyLeft = this.dragState.startLeft + deltaLeft;          // 当前所处位置</span><br><span class="line">  resizeProxy.style.left = Math.max(minLeft, proxyLeft) + &#x27;px&#x27;;    // 设置竖线位置</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>现在我们再设置鼠标抬起事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const handleMouseUp = () =&gt; &#123;</span><br><span class="line">      if (this.dragging) &#123;</span><br><span class="line">        const &#123;</span><br><span class="line">          startColumnLeft,</span><br><span class="line">          startLeft</span><br><span class="line">        &#125; = this.dragState;</span><br><span class="line">        const finalLeft = parseInt(resizeProxy.style.left, 10);</span><br><span class="line">        let columnWidth = finalLeft - startColumnLeft;</span><br><span class="line">        if(columnWidth &lt; 68) columnWidth = 68 // 最小拖动宽度，可以按需求自己定义</span><br><span class="line">        this.tableHeader[i].width = columnWidth</span><br><span class="line">        const params = JSON.stringify(this.tableHeader)</span><br><span class="line">        // 这里执行请求事件，将表头以json格式发送给后端，保存当前设置的宽度，完成后设置当前元素宽</span><br><span class="line">        columnEl.style.width = columnWidth + &#x27;px&#x27;</span><br><span class="line">        document.body.style.cursor = &#x27;&#x27;; </span><br><span class="line">        this.dragging = false;</span><br><span class="line">        this.draggingColumn = null;</span><br><span class="line">        this.dragState = &#123;&#125;;</span><br><span class="line">        this.resizeProxyVisible = false;</span><br><span class="line">      &#125;</span><br><span class="line">      // 移除监听事件</span><br><span class="line">      document.removeEventListener(&#x27;mousemove&#x27;, handleMouseMove);</span><br><span class="line">      document.removeEventListener(&#x27;mouseup&#x27;, handleMouseUp);</span><br><span class="line">      document.onselectstart = null;</span><br><span class="line">      document.ondragstart = null;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>这样，拖动宽度的方法就完成了，主要参照的饿了么表格宽度调整。</p>
+<h2 id="拖拽表头"><a href="#拖拽表头" class="headerlink" title="拖拽表头"></a>拖拽表头</h2><p>下面我们开始写拖拽表头元素，思路与拖拽宽度一样，我们创建一个dom（draggingDom）来作为‘拿起’的元素，然后当我们挪动超过左右元素的一半宽度时，我们将前（后）元素设置边框。起初写到这里时，陷入思维误区，卡了很久，感谢好基友<code>yogwang</code>提供的中线思路，不然我还在傻傻的动态计算元素宽度。<br>我们将整个表头元素模拟成坐标轴，以当前鼠标点击的节点为(0 ,0)，向左边为负（dragging_left），向右为正（dragging_right）<br>同样，我们先将需要的元素准备好，先计算每个表头结构的中线位置，时间紧迫，这里写了两个方法来计算，后面有时间复盘再来修改吧。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 左边中线数组</span><br><span class="line">getPreLine(i) &#123;</span><br><span class="line">  let arr = []</span><br><span class="line">  let _this = this</span><br><span class="line">  const setPreWith = (n)=&gt; &#123;</span><br><span class="line">    if(!n) return false</span><br><span class="line">    let len = this.getDomsWidth(n,i) + _this.tableHeader[n-1].width /2</span><br><span class="line">    arr.push(-len)</span><br><span class="line">    setPreWith(n - 1)</span><br><span class="line">  &#125;</span><br><span class="line">  setPreWith(i)</span><br><span class="line">  const newArr = arr.reverse()</span><br><span class="line">  return newArr</span><br><span class="line">&#125;,</span><br><span class="line">// 获取临近宽度集合</span><br><span class="line">getDomsWidth(k,j) &#123;</span><br><span class="line">  let _this = this</span><br><span class="line">  let len = 0</span><br><span class="line">  for(let i = k; i &lt; j; i++) &#123;</span><br><span class="line">    len = len + this.tableHeader[i].width</span><br><span class="line">  &#125;</span><br><span class="line">  return len</span><br><span class="line">&#125;,</span><br><span class="line">const lineArr = this.getPreLine(i).concat([0]).concat(this.getNextLine(i)) // 中线数组集合</span><br></pre></td></tr></table></figure>
+<p>同样的，我们使用一个dom来承载拖动的内容，点击时定义其宽高以及初始位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 拖动表头位置</span><br><span class="line">this.draggingcell = true</span><br><span class="line">this.draggingDomVisible = true</span><br><span class="line">this.$refs.draggingDom.style.width = columnRect.width + &#x27;px&#x27;</span><br><span class="line">this.$refs.draggingDom.style.left = columnRect.left - 20 + &#x27;px&#x27;</span><br><span class="line">this.draggingText = this.tableHeader[i].label</span><br><span class="line">// 获取中线</span><br><span class="line">let end = i;</span><br><span class="line">this.activedIndex = i</span><br><span class="line">// 阻止默认事件</span><br><span class="line">document.onselectstart = function() &#123; return false; &#125;;</span><br><span class="line">document.ondragstart = function() &#123; return false; &#125;;</span><br></pre></td></tr></table></figure>
+<p>下面是拖动表头的鼠标移动事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">const handleMouseMove = (event) =&gt; &#123;</span><br><span class="line">//进行移动</span><br><span class="line">const deltaLeft = event.clientX - this.dragState.startMouseLeft; // 实际位移距离</span><br><span class="line">const proxyLeft = deltaLeft + columnRect.left - 20 // 位移后距离左边距离</span><br><span class="line">this.$refs.draggingDom.style.left = proxyLeft + &#x27;px&#x27;; // 生成初始位置</span><br><span class="line">  // 点击处为原点，向左为负，向右为正，我们只需要对比前后两个dom的中线即可</span><br><span class="line">  if(deltaLeft &lt; 0) &#123;</span><br><span class="line">      this.dragState.direction = &#x27;left&#x27;</span><br><span class="line">      // 如果移动距离小于前一个dom中线时</span><br><span class="line">      if(deltaLeft &lt; lineArr[end-1]) &#123;</span><br><span class="line">        removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_left&#x27;)</span><br><span class="line">        removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_right&#x27;)</span><br><span class="line">        --end;</span><br><span class="line">        addClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_&#x27;+this.dragState.direction)</span><br><span class="line">      &#125; else if (deltaLeft &gt;= lineArr[end]) &#123;</span><br><span class="line">        removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_left&#x27;)</span><br><span class="line">        removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_right&#x27;)</span><br><span class="line">        ++end</span><br><span class="line">        addClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_&#x27;+this.dragState.direction)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else if((deltaLeft &gt; 0))&#123;</span><br><span class="line">    this.dragState.direction = &#x27;right&#x27;</span><br><span class="line">    if(deltaLeft &gt; lineArr[end+1]) &#123;</span><br><span class="line">      removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_left&#x27;)</span><br><span class="line">      removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_right&#x27;)</span><br><span class="line">      ++end</span><br><span class="line">      addClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_&#x27;+this.dragState.direction)</span><br><span class="line">    &#125; else if(deltaLeft &lt;= lineArr[end]) &#123;</span><br><span class="line">      removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_left&#x27;)</span><br><span class="line">      removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_right&#x27;)</span><br><span class="line">      --end</span><br><span class="line">      addClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_&#x27;+this.dragState.direction)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>最后我们来看一下鼠标抬起时事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const handleMouseUp = (event) =&gt; &#123;</span><br><span class="line">  // 鼠标抬起时，我们先移除当前的边线</span><br><span class="line">  removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_left&#x27;)</span><br><span class="line">  removeClass(this.$el.querySelector(&#x27;.column_&#x27;+ end),&#x27;dragging_right&#x27;)</span><br><span class="line">  end !== this.activedIndex &amp;&amp; this.setThDom(end)</span><br><span class="line">  // 此处可以将修改值传给后端</span><br><span class="line">  this.draggingDomVisible = false</span><br><span class="line">  this.draggingcell = false</span><br><span class="line">  this.dragState = &#123;&#125;;</span><br><span class="line">  document.removeEventListener(&#x27;mousemove&#x27;, handleMouseMove);</span><br><span class="line">  document.removeEventListener(&#x27;mouseup&#x27;, handleMouseUp);</span><br><span class="line">  document.onselectstart = null;</span><br><span class="line">  document.ondragstart = null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就像拖拽宽度一样，我们同样需要监听鼠标事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&#x27;mousemove&#x27;, handleMouseMove);</span><br><span class="line">document.addEventListener(&#x27;mouseup&#x27;, handleMouseUp);</span><br></pre></td></tr></table></figure>
+<p>好了，这样拖拽的表格以及拖拽宽度就完成了，完整的demo我会整理好发到git仓库上。</p>
+
+      
+    </div>
+    <!-- <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://www.wangzilong.cn/2020/11/20/%E6%8B%96%E6%8B%BD%E8%A1%A8%E6%A0%BC/" title="拖拽表格" target="_blank" rel="external">https://www.wangzilong.cn/2020/11/20/%E6%8B%96%E6%8B%BD%E8%A1%A8%E6%A0%BC/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/JerryWangTdcy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/JerryWangTdcy" target="_blank"><span class="text-dark">JerryWang</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div> -->
+  </article>
+  
+    <!--
+ * @Description: 
+ * @Author: 王子龙
+ * @Date: 2020-02-28 13:05:17
+ * @LastEditTime: 2020-08-04 11:44:29
+ * @LastEditors: 王子龙
+--> 
+<!-- 
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+ -->
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/11/24/%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/" title="数组常用方法集合"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/09/10/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D/" title="移动端适配"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/JerryWangTdcy" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">陈小春有应采儿，我有胖可儿。</div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

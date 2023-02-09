@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang=ln>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>h5页面打开app，安卓端和苹果端 | JerryWang</title>
+  <meta name="description" content="对于App的分享页面，移动端经常会遇到需要唤起App并定位的功能。 跳转到App方法安卓通常使用 URL Scheme 方法IOS有两种方法 meta标签和Universal Links， 我们通常使用Universal Links URL SchemeURL Scheme就是一个可以让app相互之间可以跳转的对外接口。每个app都不同，如果有重复的会响应先安装的app。URL Scheme的格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h5页面打开app，安卓端和苹果端">
+<meta property="og:url" content="https://www.wangzilong.cn/2020/02/27/oepnApp/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="对于App的分享页面，移动端经常会遇到需要唤起App并定位的功能。 跳转到App方法安卓通常使用 URL Scheme 方法IOS有两种方法 meta标签和Universal Links， 我们通常使用Universal Links URL SchemeURL Scheme就是一个可以让app相互之间可以跳转的对外接口。每个app都不同，如果有重复的会响应先安装的app。URL Scheme的格式">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-02-27T13:26:20.000Z">
+<meta property="article:modified_time" content="2020-02-27T15:07:53.514Z">
+<meta property="article:author" content="Jerry Wang">
+<meta property="article:tag" content="H5">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://www.wangzilong.cn/2020/02/27/oepnApp/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/JerryWangTdcy" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">JerryWang</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing,China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/JerryWangTdcy" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/" rel="tag">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css3/" rel="tag">css3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seo-nuxt/" rel="tag">seo nuxt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E5%B1%80/" rel="tag">布局</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/" rel="tag">方法集合</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83/" rel="tag">环境</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" rel="tag">移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" rel="tag">组件库</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/H5/" style="font-size: 13px;">H5</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/Vue/" style="font-size: 13px;">Vue</a> <a href="/tags/css3/" style="font-size: 13px;">css3</a> <a href="/tags/seo-nuxt/" style="font-size: 13px;">seo nuxt</a> <a href="/tags/%E5%B8%83%E5%B1%80/" style="font-size: 13px;">布局</a> <a href="/tags/%E6%96%B9%E6%B3%95%E9%9B%86%E5%90%88/" style="font-size: 13.5px;">方法集合</a> <a href="/tags/%E7%8E%AF%E5%A2%83/" style="font-size: 13px;">环境</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/" style="font-size: 13px;">移动端</a> <a href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" style="font-size: 13px;">组件库</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/26/vue3%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83L01/" class="title">vue3从入门到放弃L01</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-26T14:44:30.000Z" itemprop="datePublished">2022-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/07/26/%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/" class="title">Hexo常用命令</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-07-26T14:17:26.000Z" itemprop="datePublished">2022-07-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2022/05/03/%E8%AE%B0%E5%AE%98%E7%BD%91seo%E5%BC%80%E5%8F%91/" class="title">记官网seo开发【nuxtJS】</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2022-05-03T05:00:35.000Z" itemprop="datePublished">2022-05-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/09/14/%E4%BA%92%E5%8A%A8%E8%90%A5%E9%94%80%E4%B9%8B%E5%A4%A7%E8%BD%AC%E7%9B%98/" class="title">互动营销之大转盘</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-09-14T08:35:04.000Z" itemprop="datePublished">2021-09-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/08/%E5%BD%93%E5%BC%B9%E7%AA%97%E5%AD%98%E5%9C%A8%E6%97%B6%E7%A6%81%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/" class="title">当弹窗存在时禁止页面滚动</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-08T06:46:38.000Z" itemprop="datePublished">2021-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-oepnApp" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      h5页面打开app，安卓端和苹果端
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/02/27/oepnApp/" class="article-date">
+	  <time datetime="2020-02-27T13:26:20.000Z" itemprop="datePublished">2020-02-27</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/H5/" rel="tag">H5</a>
+  </span>
+
+
+        
+
+        <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/02/27/oepnApp/#comments" class="article-comment-link">評論</a></span> -->
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>对于App的分享页面，移动端经常会遇到需要唤起App并定位的功能。</p>
+<h3 id="跳转到App方法"><a href="#跳转到App方法" class="headerlink" title="跳转到App方法"></a>跳转到App方法</h3><p>安卓通常使用 URL Scheme 方法<br>IOS有两种方法 meta标签和Universal Links， 我们通常使用Universal Links</p>
+<h2 id="URL-Scheme"><a href="#URL-Scheme" class="headerlink" title="URL Scheme"></a>URL Scheme</h2><p>URL Scheme就是一个可以让app相互之间可以跳转的对外接口。每个app都不同，如果有重复的会响应先安装的app。URL Scheme的格式为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[scheme]://[host]/[path]?[query]</span><br></pre></td></tr></table></figure>
+<p>比如：</p>
+<ul>
+<li>淘宝： taobao:&#x2F;&#x2F;</li>
+<li>QQ： mqq:&#x2F;&#x2F;</li>
+<li>微信： weixin:&#x2F;&#x2F;</li>
+</ul>
+<h2 id="meta标签"><a href="#meta标签" class="headerlink" title="meta标签"></a>meta标签</h2><p>在网页上设置meta标签，使用safari打开的时候，就会在顶部显示自己app的导航条。如果没有安装app点击能够跳转到appstore去下载，如果安装了app就能直接通过顶部的meta标签唤醒app了。（此为IOS特有）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span> name=<span class="string">&quot;apple-itunes-app&quot;</span> content=<span class="string">&quot;app-id=yourId, affiliate-data=myAffiliateData, app-argument=yourScheme://&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Universal-Links"><a href="#Universal-Links" class="headerlink" title="Universal Links"></a>Universal Links</h2><p>iOS 9之前，一直使用的是URL Schemes技术来从外部对App进行跳转，但是iOS系统中进行URL Schemes跳转的时候如果没有安装App，会提示Cannot open Page的提示，而且当注册有多个scheme相同的时候，目前没有办法区分，但是从iOS 9起可以使用Universal Links技术进行跳转页面，这是一种体验更加完美的解决方案</p>
+<h2 id="实现唤醒APP功能"><a href="#实现唤醒APP功能" class="headerlink" title="实现唤醒APP功能"></a>实现唤醒APP功能</h2><p>大多数需要唤醒app时都是在微信内，但由于微信内部禁用了唤醒功能，所以做了一个引导页，引导用户通过浏览器打开。（一些知名app可以唤起）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">&quot;main&quot;</span>&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;tips&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;ios&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;tips&quot;</span> <span class="built_in">id</span>=<span class="string">&quot;android&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;logo&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=<span class="string">&quot;info&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div <span class="built_in">id</span>=<span class="string">&quot;a-btn&quot;</span> class=<span class="string">&quot;downloadBtna&quot;</span>&gt;&lt;a href=<span class="string">&quot;https://wwww.******.com.cn/api/app/download&quot;</span>&gt;&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div <span class="built_in">id</span>=<span class="string">&quot;i-btn&quot;</span> class=<span class="string">&quot;downloadBtni&quot;</span>&gt;&lt;a href=<span class="string">&quot;https://itunes.apple.com/cn/app/yourId&quot;</span>&gt;&lt;/a&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// 获取浏览器用于 HTTP 请求的用户代理头的值</span><br><span class="line">var u = navigator.userAgent, ua = u.toLowerCase()</span><br><span class="line">var isWeiXin = ua.indexOf(<span class="string">&#x27;micromessenger&#x27;</span>) != -1;</span><br><span class="line">var &#123;isAndroid, isIOS&#125; = detectVersion()</span><br><span class="line">// 获取参数<span class="built_in">id</span>值、来源值，以便用于scheme跳转</span><br><span class="line">var <span class="built_in">id</span> = getQueryString(<span class="string">&#x27;id&#x27;</span>)</span><br><span class="line">var <span class="built_in">source</span> = getQueryString(<span class="string">&#x27;source&#x27;</span>)</span><br><span class="line">// 判断当前浏览器</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">detectVersion</span></span>() &#123;</span><br><span class="line">  var isAndroid, isIOS;</span><br><span class="line">  <span class="keyword">if</span>(u.indexOf(<span class="string">&#x27;Android&#x27;</span>) &gt; -1 || u.indexOf(<span class="string">&#x27;Linux&#x27;</span>) &gt; -1) &#123;      // android or uc browser</span><br><span class="line">      // android</span><br><span class="line">      isAndroid = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(ua.indexOf(<span class="string">&quot;like mac os x&quot;</span>) &gt; 0) &#123;</span><br><span class="line">      isIOS = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> &#123;isAndroid, isIOS&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 唤起app方法</span><br><span class="line"><span class="keyword">function</span> openApp(callback) &#123;</span><br><span class="line">  var url = <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="keyword">if</span> (isAndroid ) &#123;</span><br><span class="line">    url = <span class="string">&#x27;[scheme]://&#x27;</span>+ <span class="built_in">source</span> +<span class="string">&#x27;?id=&#x27;</span> + <span class="built_in">id</span></span><br><span class="line">    var <span class="built_in">timeout</span>, t = 3000, hasApp = <span class="literal">true</span></span><br><span class="line">    var openScript = setTimeout( <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="keyword">if</span> (!hasApp) &#123;</span><br><span class="line">        callback &amp;&amp; callback()</span><br><span class="line">      &#125;</span><br><span class="line">      document.body.removeChild(ifr)</span><br><span class="line">    &#125;,5000)</span><br><span class="line"></span><br><span class="line">    var t1 = Date.now()</span><br><span class="line">    var ifr = document.createElement(<span class="string">&quot;iframe&quot;</span>)</span><br><span class="line">    ifr.setAttribute(<span class="string">&quot;src&quot;</span>, url)</span><br><span class="line">    ifr.setAttribute(<span class="string">&quot;style&quot;</span>, <span class="string">&quot;display:none&quot;</span>)</span><br><span class="line">    document.body.appendChild(ifr)</span><br><span class="line">    <span class="built_in">timeout</span> = setTimeout( <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      var t2 = Date.now()</span><br><span class="line">      <span class="keyword">if</span> (t2 - t1 &lt; t + 100) &#123;</span><br><span class="line">        hasApp = <span class="literal">false</span></span><br><span class="line">        // 此处创建一个定时器，以便用于判断页面是否跳转，如果未成功跳转，那么判断未安装app，此时跳转到app下载</span><br><span class="line">        window.location.href=<span class="string">&quot;https://www.******.com.cn/api/app/download&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,t)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (isIOS) &#123;</span><br><span class="line">    // Universal Links 需要IOS工程师进行配置</span><br><span class="line">    window.location.href= <span class="string">&quot;https://www.******.com.cn/&quot;</span> + <span class="built_in">source</span> + <span class="string">&quot;?id=&quot;</span> + <span class="built_in">id</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">  <span class="keyword">if</span>(isWeiXin) &#123;</span><br><span class="line">    <span class="keyword">if</span>(isAndroid) &#123;</span><br><span class="line">      $(<span class="string">&quot;#a-btn&quot;</span>).show()</span><br><span class="line">      $(<span class="string">&quot;#android&quot;</span>).show()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      $(<span class="string">&quot;#i-btn&quot;</span>).show()</span><br><span class="line">      $(<span class="string">&quot;#ios&quot;</span>).show()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(isAndroid) &#123;</span><br><span class="line">      $(<span class="string">&quot;#android&quot;</span>).show()</span><br><span class="line">      $(<span class="string">&quot;#a-btn&quot;</span>).show()</span><br><span class="line">      openApp()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      $(<span class="string">&quot;#ios&quot;</span>).show()</span><br><span class="line">      $(<span class="string">&quot;#i-btn&quot;</span>).show()</span><br><span class="line">      openApp()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;   </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="以上并为考虑ios9以下版本"><a href="#以上并为考虑ios9以下版本" class="headerlink" title="以上并为考虑ios9以下版本"></a>以上并为考虑ios9以下版本</h3>
+      
+    </div>
+    <!-- <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://www.wangzilong.cn/2020/02/27/oepnApp/" title="h5页面打开app，安卓端和苹果端" target="_blank" rel="external">https://www.wangzilong.cn/2020/02/27/oepnApp/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/JerryWangTdcy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/JerryWangTdcy" target="_blank"><span class="text-dark">JerryWang</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div> -->
+  </article>
+  
+    <!--
+ * @Description: 
+ * @Author: 王子龙
+ * @Date: 2020-02-28 13:05:17
+ * @LastEditTime: 2020-08-04 11:44:29
+ * @LastEditors: 王子龙
+--> 
+<!-- 
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+ -->
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/25/eventBus/" title="eventBus"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/02/27/tinymce/" title="tinymce"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/JerryWangTdcy" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">陈小春有应采儿，我有胖可儿。</div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

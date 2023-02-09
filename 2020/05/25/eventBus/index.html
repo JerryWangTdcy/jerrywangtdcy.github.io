@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>JerryWang</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog">
-<meta property="og:url" content="https://www.wangzilong.cn/index.html">
+  <title>eventBus | JerryWang</title>
+  <meta name="description" content="哇，一转眼好几个月过去了，我的blog至今没有更新… 由于我实在太懒了，拖延症晚期，今天立了flag，一定要写两篇，刚好今天又接触到一个新的知识点。 eventBus，一个vue 2.0时代前被我忽略的神奇操作对于现在流行的前端开发模式（MVVM），经常涉及到多个组件间的通信，vue有vuex的支持，兄弟间组件传值很是方便，自己写小程序的时候，苦于没有vuex类库，又觉得自己封装vuex有一点麻烦">
+<meta property="og:type" content="article">
+<meta property="og:title" content="eventBus">
+<meta property="og:url" content="https://www.wangzilong.cn/2020/05/25/eventBus/index.html">
 <meta property="og:site_name" content="Blog">
+<meta property="og:description" content="哇，一转眼好几个月过去了，我的blog至今没有更新… 由于我实在太懒了，拖延症晚期，今天立了flag，一定要写两篇，刚好今天又接触到一个新的知识点。 eventBus，一个vue 2.0时代前被我忽略的神奇操作对于现在流行的前端开发模式（MVVM），经常涉及到多个组件间的通信，vue有vuex的支持，兄弟间组件传值很是方便，自己写小程序的时候，苦于没有vuex类库，又觉得自己封装vuex有一点麻烦">
 <meta property="og:locale">
+<meta property="article:published_time" content="2020-05-25T14:19:30.000Z">
+<meta property="article:modified_time" content="2020-05-25T15:14:30.945Z">
 <meta property="article:author" content="Jerry Wang">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://www.wangzilong.cn/index.html">
+  <link rel="canonical" href="https://www.wangzilong.cn/2020/05/25/eventBus/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
   
@@ -273,329 +278,138 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-eventBus" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/26/vue3%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83L01/">vue3从入门到放弃L01</a>
+    <h1 class="article-title" itemprop="name">
+      eventBus
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/07/26/vue3%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83L01/" class="article-date">
-	  <time datetime="2022-07-26T14:44:30.000Z" itemprop="datePublished">Jul 26</time>
+	<a href="/2020/05/25/eventBus/" class="article-date">
+	  <time datetime="2020-05-25T14:19:30.000Z" itemprop="datePublished">2020-05-25</time>
 	</a>
 </span>
-    
-    
+        
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Vue/" rel="tag">Vue</a>
+	<a class="article-tag-link-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>
   </span>
 
 
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/26/vue3%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83L01/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
+        
 
-    
-      <article class="article article-type-hexo" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/07/26/%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/">Hexo常用命令</a>
-    </h1>
-  
+        <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/25/eventBus/#comments" class="article-comment-link">評論</a></span> -->
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>哇，一转眼好几个月过去了，我的blog至今没有更新…</p>
+<p>由于我实在太懒了，拖延症晚期，今天立了flag，一定要写两篇，刚好今天又接触到一个新的知识点。</p>
+<h2 id="eventBus，一个vue-2-0时代前被我忽略的神奇操作"><a href="#eventBus，一个vue-2-0时代前被我忽略的神奇操作" class="headerlink" title="eventBus，一个vue 2.0时代前被我忽略的神奇操作"></a>eventBus，一个vue 2.0时代前被我忽略的神奇操作</h2><p>对于现在流行的前端开发模式（MVVM），经常涉及到多个组件间的通信，vue有vuex的支持，兄弟间组件传值很是方便，<br>自己写小程序的时候，苦于没有vuex类库，又觉得自己封装vuex有一点麻烦，兄弟间通信基本靠本地存储这种又笨又蠢的方法…<br>直到今天无意间发现了这个很好用的设计模式 — eventBus， 之前面试的时候面试官也有问我了解么，我当时并没有听过，<br>和小伙伴 <code>@yogwang</code>聊天，他说这是vue1.0时代的产物，我也就没有特别关注过。<br>今天熟悉公司代码，无意间发现，诶，怎么这么多的bus.on方法的绑定呢，和小伙伴聊了聊发现，这是我错过的神奇方法。</p>
+<h3 id="eventBus-举🌰说明"><a href="#eventBus-举🌰说明" class="headerlink" title="eventBus 举🌰说明"></a>eventBus 举🌰说明</h3><p>比如我们现在有三个组件，分别是父组件 - father, 哥哥组件 - brother, 妹妹组件 - sister，现在，哥哥想发微信给妹妹，要怎么样操作呢？<br>首先，我们给哥哥的手机下载一个微信，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;view bindtap=&quot;click&quot;&gt;点击发送&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+<p>现在，想要把信息发送出去，我们需要建立一个基站，也就是bus.js。<br>然后，我们可以在基站内建立功能：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">my.BUS = (function()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    // 通过on来注册事件</span><br><span class="line">    on: (name, callback) =&gt; &#123;</span><br><span class="line">        if (isString(name) &amp;&amp; isFunction(callback)) &#123;</span><br><span class="line">            //防止多次注册触发</span><br><span class="line">            my.BUS.off(name, callback);</span><br><span class="line">            if (!events[name]) &#123;</span><br><span class="line">                events[name] = [];</span><br><span class="line">            &#125;</span><br><span class="line">            events[name].push(callback);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 通过emit来触发事件</span><br><span class="line">    emit: () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    // 通过off来卸载事件</span><br><span class="line">    off:() =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;) ()</span><br></pre></td></tr></table></figure>
+<p>接下来，我们在哥哥的手机中编辑好要发送的消息<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">click() &#123;</span><br><span class="line">  my.BUS.emit(&#x27;msg&#x27;, &#x27;hello world&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>这样，妹妹就收到了哥哥发来的短信</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">my.BUS.on(&#x27;msg&#x27;, res =&gt; &#123;</span><br><span class="line">  console.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这个对于没有vuex类库的小程序来讲，作为兄弟组件间传值还是比较方便的。</p>
 
+      
+    </div>
+    <!-- <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://www.wangzilong.cn/2020/05/25/eventBus/" title="eventBus" target="_blank" rel="external">https://www.wangzilong.cn/2020/05/25/eventBus/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/JerryWangTdcy" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/JerryWangTdcy" target="_blank"><span class="text-dark">JerryWang</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div> -->
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2022/07/26/%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/" class="article-date">
-	  <time datetime="2022-07-26T14:17:26.000Z" itemprop="datePublished">Jul 26</time>
-	</a>
-</span>
+    <!--
+ * @Description: 
+ * @Author: 王子龙
+ * @Date: 2020-02-28 13:05:17
+ * @LastEditTime: 2020-08-04 11:44:29
+ * @LastEditors: 王子龙
+--> 
+<!-- 
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
     
-    
+  </section>
+ -->
 
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/07/26/%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/05/03/%E8%AE%B0%E5%AE%98%E7%BD%91seo%E5%BC%80%E5%8F%91/">记官网seo开发【nuxtJS】</a>
-    </h1>
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
   
-
-  </div>
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/25/%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81/" title="防抖节流"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/02/27/oepnApp/" title="h5页面打开app，安卓端和苹果端"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2022/05/03/%E8%AE%B0%E5%AE%98%E7%BD%91seo%E5%BC%80%E5%8F%91/" class="article-date">
-	  <time datetime="2022-05-03T05:00:35.000Z" itemprop="datePublished">May 3</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/seo-nuxt/" rel="tag">seo nuxt</a>
-  </span>
-
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/03/%E8%AE%B0%E5%AE%98%E7%BD%91seo%E5%BC%80%E5%8F%91/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/14/%E4%BA%92%E5%8A%A8%E8%90%A5%E9%94%80%E4%B9%8B%E5%A4%A7%E8%BD%AC%E7%9B%98/">互动营销之大转盘</a>
-    </h1>
   
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/09/14/%E4%BA%92%E5%8A%A8%E8%90%A5%E9%94%80%E4%B9%8B%E5%A4%A7%E8%BD%AC%E7%9B%98/" class="article-date">
-	  <time datetime="2021-09-14T08:35:04.000Z" itemprop="datePublished">Sep 14</time>
-	</a>
-</span>
-    
-    
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/09/14/%E4%BA%92%E5%8A%A8%E8%90%A5%E9%94%80%E4%B9%8B%E5%A4%A7%E8%BD%AC%E7%9B%98/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/05/08/%E5%BD%93%E5%BC%B9%E7%AA%97%E5%AD%98%E5%9C%A8%E6%97%B6%E7%A6%81%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/">当弹窗存在时禁止页面滚动</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/05/08/%E5%BD%93%E5%BC%B9%E7%AA%97%E5%AD%98%E5%9C%A8%E6%97%B6%E7%A6%81%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/" class="article-date">
-	  <time datetime="2021-05-08T06:46:38.000Z" itemprop="datePublished">May 8</time>
-	</a>
-</span>
-    
-    
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/08/%E5%BD%93%E5%BC%B9%E7%AA%97%E5%AD%98%E5%9C%A8%E6%97%B6%E7%A6%81%E6%AD%A2%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/30/%E6%AD%A3%E5%88%99%E5%A4%A7%E5%85%A8/">正则大全</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/04/30/%E6%AD%A3%E5%88%99%E5%A4%A7%E5%85%A8/" class="article-date">
-	  <time datetime="2021-04-30T07:24:54.000Z" itemprop="datePublished">Apr 30</time>
-	</a>
-</span>
-    
-    
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/30/%E6%AD%A3%E5%88%99%E5%A4%A7%E5%85%A8/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-mac下载navicat" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/30/premium%E6%8F%90%E7%A4%BA%E6%96%87%E4%BB%B6%E6%8D%9F%E5%9D%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">premium提示文件损坏的解决方案</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/04/30/premium%E6%8F%90%E7%A4%BA%E6%96%87%E4%BB%B6%E6%8D%9F%E5%9D%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="article-date">
-	  <time datetime="2021-04-30T06:10:43.000Z" itemprop="datePublished">Apr 30</time>
-	</a>
-</span>
-    
-    
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/30/premium%E6%8F%90%E7%A4%BA%E6%96%87%E4%BB%B6%E6%8D%9F%E5%9D%8F%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/13/currentColor/">currentColor</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2021/04/13/currentColor/" class="article-date">
-	  <time datetime="2021-04-13T09:44:32.000Z" itemprop="datePublished">Apr 13</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/css3/" rel="tag">css3</a>
-  </span>
-
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/13/currentColor/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/09/%E7%BB%84%E4%BB%B6%E6%8B%93%E5%B1%95/">Element 组件拓展</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/12/09/%E7%BB%84%E4%BB%B6%E6%8B%93%E5%B1%95/" class="article-date">
-	  <time datetime="2020-12-09T09:28:39.000Z" itemprop="datePublished">Dec 9</time>
-	</a>
-</span>
-    
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/%E7%BB%84%E4%BB%B6%E5%BA%93/" rel="tag">组件库</a>
-  </span>
-
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/12/09/%E7%BB%84%E4%BB%B6%E6%8B%93%E5%B1%95/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/25/%E9%87%8D%E5%AD%A6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">重学设计模式</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/11/25/%E9%87%8D%E5%AD%A6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-	  <time datetime="2020-11-25T03:17:05.000Z" itemprop="datePublished">Nov 25</time>
-	</a>
-</span>
-    
-    
-
-    <!-- <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/25/%E9%87%8D%E5%AD%A6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#comments" class="article-comment-link">評論</a></span> -->
-    
-  </p>
-</article>
-
+  <div class="bar-right">
     
   </div>
-
+  </div>
+</nav>
   
-    
-    <nav class="bar bar-footer clearfix" data-stick-bottom>
-        <div class="bar-inner">
-        <ul class="pager pull-left">
-            
-            <li class="prev disabled">
-                <a href="javascript:;">
-                    <i class="icon icon-angle-left"></i>
-                    Prev
-                </a>
-            </li>
-            
-            
-            <li class="next">
-                <a href="/page/2/">
-                    Next
-                    <i class="icon icon-angle-right"></i>
-                </a>
-            </li>
-            
-        </ul>
-        <div class="total-article bar-right">Page 1 of 3</div>
-        </div>
-    </nav>
-    
- 
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -650,6 +464,33 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 
 
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
